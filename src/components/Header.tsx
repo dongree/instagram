@@ -1,38 +1,41 @@
 'use client';
 
 import Link from 'next/link';
-import {
-  AiOutlineHome,
-  AiFillHome,
-  AiOutlinePlusSquare,
-  AiFillPlusSquare,
-} from 'react-icons/ai';
 
-import { BiSearch, BiSolidSearch } from 'react-icons/bi';
 import { usePathname } from 'next/navigation';
+import HomeIcon from './ui/icons/HomeIcon';
+import HomeFillIcon from './ui/icons/HomeFillIcon';
+import SearchIcon from './ui/icons/SearchIcon';
+import SearchFillIcon from './ui/icons/SearchFillIcon';
+import NewIcon from './ui/icons/NewIcon';
+import NewFillIcon from './ui/icons/NewFillIcon';
+import ColorButton from './ui/ColorButton';
+
+const menu = [
+  { href: '/', icon: <HomeIcon />, clickedIcon: <HomeFillIcon /> },
+  { href: '/search', icon: <SearchIcon />, clickedIcon: <SearchFillIcon /> },
+  { href: '/new', icon: <NewIcon />, clickedIcon: <NewFillIcon /> },
+];
 
 export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="flex justify-between items-center px-10 py-5 sticky top-0 bg-white">
-      <h1 className=" text-2xl font-bold">Instantgram</h1>
-      <nav className="flex items-center gap-3 text-2xl">
-        <Link href="/">
-          {pathname === '/' ? <AiFillHome /> : <AiOutlineHome />}
-        </Link>
-        <Link href="/search">
-          {pathname === '/search' ? <BiSolidSearch /> : <BiSearch />}
-        </Link>
-        <Link href="/new">
-          {pathname === '/new' ? <AiFillPlusSquare /> : <AiOutlinePlusSquare />}
-        </Link>
-        <Link
-          href="/"
-          className="text-lg rounded-lg p-1 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"
-        >
-          <span className="w-full h-full bg-white rounded-lg p-1">Sign in</span>
-        </Link>
+    <header className="flex justify-between items-center px-10 py-5 sticky top-0 bg-white border-b z-10">
+      <Link href="/">
+        <h1 className="text-2xl font-bold">Instantgram</h1>
+      </Link>
+      <nav>
+        <ul className="flex items-center gap-3 text-2xl">
+          {menu.map(item => (
+            <li key={item.href}>
+              <Link href={item.href}>
+                {pathname === item.href ? item.clickedIcon : item.icon}
+              </Link>
+            </li>
+          ))}
+          <ColorButton text="Sign in" onClick={() => {}} />
+        </ul>
       </nav>
     </header>
   );

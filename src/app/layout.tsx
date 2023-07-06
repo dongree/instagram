@@ -15,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={sans.className}>
+    <html lang="en" className={sans.className}>
+      <body className="w-full max-w-screen-xl overflow-auto mx-auto">
         <Header />
         <main>{children}</main>
       </body>
